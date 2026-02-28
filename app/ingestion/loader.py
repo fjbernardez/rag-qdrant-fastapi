@@ -38,17 +38,13 @@ def iter_supported_files(data_dir: Path) -> Iterator[Path]:
     return iter(sorted(files))
 
 
-def load_text_fragments(data_dir: Path) -> list[LoadedText]:
-    fragments: list[LoadedText] = []
-
+def load_text_fragments(data_dir: Path) -> Iterator[LoadedText]:
     for file_path in iter_supported_files(data_dir):
         extension = file_path.suffix.lower()
         if extension == ".txt":
-            fragments.extend(_load_txt(file_path))
+            yield from _load_txt(file_path)
         elif extension == ".pdf":
-            fragments.extend(_load_pdf(file_path))
-
-    return fragments
+            yield from _load_pdf(file_path)
 
 
 def _load_txt(file_path: Path) -> list[LoadedText]:
