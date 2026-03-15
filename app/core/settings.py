@@ -12,6 +12,10 @@ class Settings(BaseSettings):
         default="text-embedding-3-small",
         validation_alias="OPENAI_EMBEDDING_MODEL",
     )
+    openai_chat_model: str = Field(
+        default="gpt-5-mini",
+        validation_alias="OPENAI_CHAT_MODEL",
+    )
     embedding_batch_size: int = Field(
         default=64,
         gt=0,
